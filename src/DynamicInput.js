@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Criteria from './Criteria';
 import { Button } from 'react-bootstrap';
 import Results from './Results';
-import { findAllPaths, findEdgePairs, getAllNodes } from './Logic';
+import { findAllPaths, findEdgePairs } from './Logic';
 import TotalResults from './TotalResults';
 
 function DynamicInputFields() {
