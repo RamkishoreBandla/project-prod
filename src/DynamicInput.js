@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Criteria from './Criteria';
 import { Button } from 'react-bootstrap';
 import Results from './Results';
-import { findAllPaths, findEdgePairs } from './Logic';
+import { findAllPaths, findEdgePairs, getAllNodes } from './Logic';
 import TotalResults from './TotalResults';
 
 function DynamicInputFields() {
@@ -11,7 +11,14 @@ function DynamicInputFields() {
   const [firstNode, setFirstNode] = useState(""); //initial
   const [lastNode, setLastNode] = useState(""); //final
   const [finalResults, setFinalResults] = useState(null); //final results
-  const [totalResults,setTotalResults]=useState([]);
+  const [totalResults, setTotalResults] = useState([]);
+
+  //Error handler states
+  const [initialError, setInitialError] = useState(false);
+  const [finalError, setFinalError] = useState(false);
+  const [inputErr, setInputErr] = useState(false);
+  const [criteriaErr, setCriteriaErr] = useState(false);
+
   const handleAddInput = () => {
     const newInput = {
       id: inputs.length + 1,
@@ -34,104 +41,163 @@ function DynamicInputFields() {
     setInputs(newInputs);
   };
 
-  const handleSubmission = (e) => {
+  const graphValidator = (finalGraph) => {
+    let flag = false;
+    //missing nodes
+    for (let [k, v] of Object.entries(finalGraph)) {
+      if (k === '' || k === ' ') {
+        setInputErr(true);
+        flag = true;
+        break;
+      }
+    }
 
-    console.log(inputs);
-    console.log(selectedOption);
-    console.log(firstNode, lastNode);
-    let finalGraph=constructGraph(inputs);
+    return flag === false;
+  }
+
+  const nodesValidator = (nodes, initial, final, finalGraph) => {
+
+    let flag = false;
+    // incorrect initial node
+    if (!nodes.find(e => e === initial)) {
+      setInitialError(true);
+      flag = true;
+    }
+    //incorrect final node
+    if (!nodes.find(e => e === final)) {
+      setFinalError(true);
+
+      flag = true;
+    }
+
+    //missing nodes
+    for (let [k, v] of Object.entries(finalGraph)) {
+      if (k === '' || k === ' ') {
+        setInputErr(true);
+        flag = true;
+        break;
+      }
+    }
+
+    return flag === false;
+
+  }
+
+  const handleSubmission = (e) => {
+    //reset error values for new submission
+    setInitialError(false);
+    setFinalError(false);
+    setInputErr(false);
+    setCriteriaErr(false);
+    setFinalResults(null);
+
+    let finalGraph = constructGraph(inputs);
     console.log(finalGraph);
 
+    if (selectedOption === 'edgepairif') {
+      let criteria_method = 'Test Path for Edge Pair Coverage Initial to Final'
 
-
-    if(selectedOption==='edgepairif'){
-      let criteria_method='Test Path for Edge Pair Coverage Initial to Final'
-
-      
-
-      let allEdgePairsInitialtoFinal= findAllPaths(finalGraph,firstNode,lastNode);
-      let outputObj={
-        input_graph:finalGraph,
-        initial_node:firstNode,
-        final_node:lastNode,
-        criteria_method,
-        output:allEdgePairsInitialtoFinal
+      let nodes = getAllNodes(finalGraph);
+      //validations check
+      if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
+        let allEdgePairsInitialtoFinal = findAllPaths(finalGraph, firstNode, lastNode);
+        let outputObj = {
+          input_graph: finalGraph,
+          initial_node: firstNode,
+          final_node: lastNode,
+          criteria_method,
+          output: allEdgePairsInitialtoFinal
+        }
+        console.log(outputObj);
+        setFinalResults(outputObj, "test path edge pair path initial to final");
+        setTotalResults([...totalResults, outputObj]);
       }
-      console.log(outputObj);
-      setFinalResults(outputObj,"test path edge pair path initial to final");
-      setTotalResults([...totalResults,outputObj]);
     }
-    else if(selectedOption==='allep'){
-      let criteria_method='All Edge Pairs';
-      let allEdgePairs=findEdgePairs(finalGraph);
-      let outputObj={
-        input_graph:finalGraph,
-        initial_node:null,
-        final_node:null,
-        criteria_method,
-        output:allEdgePairs
+    else if (selectedOption === 'allep') {
+      let criteria_method = 'All Edge Pairs';
+      //validations check
+      if (graphValidator(finalGraph)) {
+        let allEdgePairs = findEdgePairs(finalGraph);
+        let outputObj = {
+          input_graph: finalGraph,
+          initial_node: null,
+          final_node: null,
+          criteria_method,
+          output: allEdgePairs
+        }
+        console.log(outputObj, " all edge pairs");
+        setFinalResults(outputObj);
+        setTotalResults([...totalResults, outputObj]);
       }
-      console.log(outputObj," all edge pairs");
-      setFinalResults(outputObj);
-      setTotalResults([...totalResults,outputObj]);
     }
-    else if(selectedOption==='nc'){
-      let criteria_method='Test Path for Node Coverage Initial to Final';
-      let node_coverage_result= findAllPaths(finalGraph,firstNode,lastNode);
-        console.log(node_coverage_result," node coverage from function");
-        let outputObj={
-        input_graph:finalGraph,
-        initial_node:firstNode,
-        final_node:lastNode,
-        criteria_method,
-        output:node_coverage_result
+    else if (selectedOption === 'nc') {
+      let criteria_method = 'Test Path for Node Coverage Initial to Final';
+      let nodes = getAllNodes(finalGraph);
+      //validations check
+      if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
+        let node_coverage_result = findAllPaths(finalGraph, firstNode, lastNode);
+        console.log(node_coverage_result, " node coverage from function");
+        let outputObj = {
+          input_graph: finalGraph,
+          initial_node: firstNode,
+          final_node: lastNode,
+          criteria_method,
+          output: node_coverage_result
+        }
+        console.log(outputObj);
+        setFinalResults(outputObj, "Test Path for Node Coverage Initial to Final");
+        setTotalResults([...totalResults, outputObj]);
       }
-      console.log(outputObj);
-      setFinalResults(outputObj,"Test Path for Node Coverage Initial to Final");
-      setTotalResults([...totalResults,outputObj]);
     }
-    else if(selectedOption==='ec'){
-      let criteria_method='Test Path for Edge Coverage Initial to Final';
-      let node_coverage_result= findAllPaths(finalGraph,firstNode,lastNode);
+    else if (selectedOption === 'ec') {
+      let criteria_method = 'Test Path for Edge Coverage Initial to Final';
+      let nodes = getAllNodes(finalGraph);
+      //validations check
+      if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
+        let node_coverage_result = findAllPaths(finalGraph, firstNode, lastNode);
 
-        let outputObj={
-        input_graph:finalGraph,
-        initial_node:firstNode,
-        final_node:lastNode,
-        criteria_method,
-        output:node_coverage_result
+        let outputObj = {
+          input_graph: finalGraph,
+          initial_node: firstNode,
+          final_node: lastNode,
+          criteria_method,
+          output: node_coverage_result
+        }
+        console.log(outputObj);
+        setFinalResults(outputObj, "Test Path for Edge Coverage Initial to Final");
+        setTotalResults([...totalResults, outputObj]);
       }
-      console.log(outputObj);
-      setFinalResults(outputObj,"Test Path for Edge Coverage Initial to Final");
-      setTotalResults([...totalResults,outputObj]);
+    }
+    else { //no criteria selected
+      setCriteriaErr(true);
     }
 
   }
 
-  const constructGraph=(inputs)=>{
-    let graph={}
-    for(let i of inputs){
-      graph[i['value1']]=i['value2'].split(",").map(e=>e.trim());
+  const constructGraph = (inputs) => {
+    let graph = {}
+    for (let i of inputs) {
+      graph[i['value1']] = i['value2'].split(",").map(e => e.trim());
     }
     return graph;
   }
 
   return (
     <>
-    <div className='container mt-5'>
-    <div className='row'>
-      <div className='col'>
-        <h2>Graph Edge Pair Coverage</h2>
+      <div className='container mt-5'>
+        <div className='row'>
+          <div className='col'>
+            <h2>Graph Edge Pair Coverage</h2>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
 
       <div className='container mt-5'>
 
         {inputs.map((input, index) => (
           <div key={input.id} className='row mt-1'>
             <div className='col'>
-              Enter Node: &nbsp; 
+              Enter Node: &nbsp;
               <input
                 type="text"
                 name="value1"
@@ -164,7 +230,7 @@ function DynamicInputFields() {
           </div>
         </div>
 
-{/* criteria comp */}
+        {/* criteria comp */}
         <div className='row mt-2'>
           <div className='col'>
             <Criteria selectedOption={selectedOption} setSelectedOption={(val) => { setSelectedOption(val) }} />
@@ -173,29 +239,39 @@ function DynamicInputFields() {
         </div>
 
 
-{/* initail final node appearance logic */}
+        {/* initail final node appearance logic */}
         {selectedOption && selectedOption !== 'allep' ?
           <div className='row mt-2'>
             <div className='col'>
               Enter Initial node
               <input type='text' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }}></input>
+              {initialError && <div><br /><span style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
             </div>
             <div className='col'>
               Enter Final Node
               <input type='text' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }}></input>
+              {finalError && <div><br /><span style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
             </div>
           </div>
           :
           null
         }
 
-
-
         <div className='row mt-2'>
           <div className='col'>
             <Button className='primary' onClick={(e) => { handleSubmission(e) }}>Submit</Button>
           </div>
         </div>
+        {inputErr && <div className='row mt-2'>
+          <div className='col'>
+            <span style={{ color: 'red' }}>Input shouldn't contain empty node</span>
+          </div>
+        </div>}
+        {criteriaErr && <div className='row mt-2'>
+          <div className='col'>
+            <span style={{ color: 'red' }}>Please choose Criteria</span>
+          </div>
+        </div>}
       </div >
       <div className='container mt-5'>
         <h3>Result</h3>
@@ -203,7 +279,7 @@ function DynamicInputFields() {
       </div>
       <div className='container mt-5'>
         <h3>History</h3>
-        {totalResults.length>0? <TotalResults totalResults={totalResults} />:null}
+        {totalResults.length > 0 ? <TotalResults totalResults={totalResults} /> : null}
       </div>
 
     </>
