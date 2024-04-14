@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Maj-Project/static/css/main.e6c13ad2.css",
+    "main.js": "/Maj-Project/static/js/main.415551f7.js",
+    "static/js/592.bf6ca574.chunk.js": "/Maj-Project/static/js/592.bf6ca574.chunk.js",
+    "index.html": "/Maj-Project/index.html",
+    "main.e6c13ad2.css.map": "/Maj-Project/static/css/main.e6c13ad2.css.map",
+    "main.415551f7.js.map": "/Maj-Project/static/js/main.415551f7.js.map",
+    "592.bf6ca574.chunk.js.map": "/Maj-Project/static/js/592.bf6ca574.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.415551f7.js"
+  ]
+}
