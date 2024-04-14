@@ -44,7 +44,7 @@ function DynamicInputFields() {
   const graphValidator = (finalGraph) => {
     let flag = false;
     //missing nodes
-    for (let [k, v] of Object.entries(finalGraph)) {
+    for (let [k, ] of Object.entries(finalGraph)) {
       if (k === '' || k === ' ') {
         setInputErr(true);
         flag = true;
@@ -71,7 +71,7 @@ function DynamicInputFields() {
     }
 
     //missing nodes
-    for (let [k, v] of Object.entries(finalGraph)) {
+    for (let [k, ] of Object.entries(finalGraph)) {
       if (k === '' || k === ' ') {
         setInputErr(true);
         flag = true;
