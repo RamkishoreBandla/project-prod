@@ -5,7 +5,7 @@ const TotalResults = ({ totalResults }) => {
 
             <div className="row">
                 <div className="col">
-                    {totalResults && <table className="table table-hover">
+                    {totalResults && <table id="totalResultsTable" className="table table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>

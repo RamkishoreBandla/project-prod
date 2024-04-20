@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Criteria from './Criteria';
 import { Button } from 'react-bootstrap';
 import Results from './Results';
-import { findAllPaths, findEdgePairs, getAllNodes } from './Logic';
+import { edgePathCoverageIF, findAllPaths, findEdgePairs, getAllNodes, nodeCoverageLogic } from './Logic';
 import TotalResults from './TotalResults';
 
 function DynamicInputFields() {
@@ -135,7 +135,7 @@ function DynamicInputFields() {
       let nodes = getAllNodes(finalGraph);
       //validations check
       if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
-        let node_coverage_result = findAllPaths(finalGraph, firstNode, lastNode);
+        let node_coverage_result = nodeCoverageLogic(finalGraph, firstNode, lastNode);
         console.log(node_coverage_result, " node coverage from function");
         let outputObj = {
           input_graph: finalGraph,
@@ -154,7 +154,7 @@ function DynamicInputFields() {
       let nodes = getAllNodes(finalGraph);
       //validations check
       if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
-        let node_coverage_result = findAllPaths(finalGraph, firstNode, lastNode);
+        let node_coverage_result = edgePathCoverageIF(finalGraph, firstNode, lastNode);
 
         let outputObj = {
           input_graph: finalGraph,
@@ -245,12 +245,12 @@ function DynamicInputFields() {
             <div className='col'>
               Enter Initial node
               <input type='text' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }}></input>
-              {initialError && <div><br /><span style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
+              {initialError && <div><br /><span id='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
             </div>
             <div className='col'>
               Enter Final Node
               <input type='text' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }}></input>
-              {finalError && <div><br /><span style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
+              {finalError && <div><br /><span id='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
             </div>
           </div>
           :
@@ -264,12 +264,12 @@ function DynamicInputFields() {
         </div>
         {inputErr && <div className='row mt-2'>
           <div className='col'>
-            <span style={{ color: 'red' }}>Input shouldn't contain empty node</span>
+            <span id='inputNodeError' style={{ color: 'red' }}>Input shouldn't contain empty node</span>
           </div>
         </div>}
         {criteriaErr && <div className='row mt-2'>
           <div className='col'>
-            <span style={{ color: 'red' }}>Please choose Criteria</span>
+            <span id='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
           </div>
         </div>}
       </div >

@@ -10,14 +10,7 @@ console.log(selectedOption);
 
     return (
         <Form>
-            <Form.Check
-                type="radio"
-                label="Edge Pair Coverage Initial to Final"
-                name="radioGroup"
-                value="edgepairif"
-                checked={selectedOption === 'edgepairif'}
-                onChange={handleOptionChange}
-            />
+         
             <Form.Check
                 type="radio"
                 label="All Edge Pairs"
@@ -40,6 +33,14 @@ console.log(selectedOption);
                 name="radioGroup"
                 value="ec"
                 checked={selectedOption === 'ec'}
+                onChange={handleOptionChange}
+            />
+               <Form.Check
+                type="radio"
+                label="Edge Pair Coverage Initial to Final"
+                name="radioGroup"
+                value="edgepairif"
+                checked={selectedOption === 'edgepairif'}
                 onChange={handleOptionChange}
             />
         </Form>

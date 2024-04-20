@@ -3,7 +3,7 @@ const Results = ({ finalResults  }) => {
         <>
             <div className="row">
                 <div className="col">
-                    {finalResults && <table className="table table-hover">
+                    {finalResults && <table id="currentResultsTable" className="table table-hover">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
