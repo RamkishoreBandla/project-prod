@@ -104,11 +104,15 @@ export const findEdgePairs = (graph) => {
 //displays all edges
 //edge coverage initial to final
 export function displayAllEdges(graph) {
+    let allEdges=[]
     for (const node in graph) {
         for (const adjacentNode of graph[node]) {
             console.log(`Edge: ${node} -> ${adjacentNode}`);
+            allEdges.push([node,adjacentNode])
         }
     }
+    console.log(allEdges,"all edges");
+return allEdges;
 }
 
 

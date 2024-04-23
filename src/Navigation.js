@@ -12,7 +12,8 @@ function Navigation() {
     
     <Navbar bg="primary" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/home"
+        >Graph Test Path Coverage</Navbar.Brand>
         <Nav className="me-auto">
         <Nav.Link as={Link} to="/home">Home</Nav.Link>
           <Nav.Link as={Link} to="/tool">Tool</Nav.Link>

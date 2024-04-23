@@ -18,12 +18,17 @@ console.log(selectedOption);
                 value="allep"
                 checked={selectedOption === 'allep'}
                 onChange={handleOptionChange}
+                id="allep"
+                
             />
             <Form.Check
                 type="radio"
                 label="Node Coverage Initial to Final"
+                aria-labelledby="Node Coverage Initial to Final"
+                aria-label='Node Coverage Initial to Final'
                 name="radioGroup"
                 value="nc"
+                id="nc"
                 checked={selectedOption === 'nc'}
                 onChange={handleOptionChange}
             />

@@ -1,0 +1,262 @@
+{
+    "numFailedTestSuites": 0,
+    "numFailedTests": 0,
+    "numPassedTestSuites": 3,
+    "numPassedTests": 20,
+    "numPendingTestSuites": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": 0,
+    "numTodoTests": 0,
+    "numTotalTestSuites": 3,
+    "numTotalTests": 20,
+    "openHandles": [],
+    "snapshot": {
+        "added": 0,
+        "didUpdate": false,
+        "failure": false,
+        "filesAdded": 0,
+        "filesRemoved": 0,
+        "filesRemovedList": [],
+        "filesUnmatched": 0,
+        "filesUpdated": 0,
+        "matched": 0,
+        "total": 0,
+        "unchecked": 0,
+        "uncheckedKeysByFile": [],
+        "unmatched": 0,
+        "updated": 0
+    },
+    "startTime": 1713843648519,
+    "success": true,
+    "testResults": [
+        {
+            "assertionResults": [
+                {
+                    "ancestorTitles": [],
+                    "failureMessages": [],
+                    "fullName": "renders Graph Test Path Coverage, Home, Tool links",
+                    "location": null,
+                    "status": "passed",
+                    "title": "renders Graph Test Path Coverage, Home, Tool links"
+                }
+            ],
+            "endTime": 1713843654510,
+            "message": "",
+            "name": "F:\\project-prod\\src\\App.test.js",
+            "startTime": 1713843650800,
+            "status": "passed",
+            "summary": ""
+        },
+        {
+            "assertionResults": [
+                {
+                    "ancestorTitles": [
+                        "DynamicInputFields"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "DynamicInputFields Should contain the title Graph Edge Pair Coverage",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Should contain the title Graph Edge Pair Coverage"
+                },
+                {
+                    "ancestorTitles": [
+                        "DynamicInputFields"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "DynamicInputFields Test When all the inputs are missing and submit is pressed it should display criteria error message",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test When all the inputs are missing and submit is pressed it should display criteria error message"
+                },
+                {
+                    "ancestorTitles": [
+                        "DynamicInputFields"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "DynamicInputFields Test When criteria is selected and all other inputs are missing error should be shown",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test When criteria is selected and all other inputs are missing error should be shown"
+                },
+                {
+                    "ancestorTitles": [
+                        "DynamicInputFields"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "DynamicInputFields Test when input graph is given and criteria is selected as Node Coverage initial to final but initial and final are not entered",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test when input graph is given and criteria is selected as Node Coverage initial to final but initial and final are not entered"
+                },
+                {
+                    "ancestorTitles": [
+                        "DynamicInputFields"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "DynamicInputFields Test when everything entered correctly output result to appear on screen",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test when everything entered correctly output result to appear on screen"
+                }
+            ],
+            "endTime": 1713843655096,
+            "message": "",
+            "name": "F:\\project-prod\\src\\DynamicInput.test.js",
+            "startTime": 1713843650786,
+            "status": "passed",
+            "summary": ""
+        },
+        {
+            "assertionResults": [
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning all nodes in the input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning all nodes in the input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning all edge pairs from the input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning all edge pairs from the input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning node coverage test path from initial to final",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning node coverage test path from initial to final"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning edge overage test path from initial to final",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning edge overage test path from initial to final"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning edge pair coverage test path from initial to final",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning edge pair coverage test path from initial to final"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning all edges in a input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning all edges in a input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for input graph to be object type",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for input graph to be object type"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for data inside graph to be string key and array value type",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for data inside graph to be string key and array value type"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning empty [] when no nodes in the input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning empty [] when no nodes in the input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning empty [] when no connection in the input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning empty [] when no connection in the input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning node coverage test path empty [] when start and end not in graph from initial to final",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning node coverage test path empty [] when start and end not in graph from initial to final"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning edge coverage test path to return [] from initial to final when no edges are connected and initial and final not in graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning edge coverage test path to return [] from initial to final when no edges are connected and initial and final not in graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning edge pair coverage test path from initial to final to be empty [] when there are no edge pairs and initial and final not in input graph",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning edge pair coverage test path from initial to final to be empty [] when there are no edge pairs and initial and final not in input graph"
+                },
+                {
+                    "ancestorTitles": [
+                        "Graph Logic functions"
+                    ],
+                    "failureMessages": [],
+                    "fullName": "Graph Logic functions Test for returning all edges in a input graph to be empty [] when input is incomplete",
+                    "location": null,
+                    "status": "passed",
+                    "title": "Test for returning all edges in a input graph to be empty [] when input is incomplete"
+                }
+            ],
+            "endTime": 1713843655662,
+            "message": "",
+            "name": "F:\\project-prod\\src\\Logic.test.js",
+            "startTime": 1713843654590,
+            "status": "passed",
+            "summary": ""
+        }
+    ],
+    "wasInterrupted": false
+}

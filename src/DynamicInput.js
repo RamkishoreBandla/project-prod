@@ -233,6 +233,7 @@ function DynamicInputFields() {
         {/* criteria comp */}
         <div className='row mt-2'>
           <div className='col'>
+            <h4>Select Criteria </h4>
             <Criteria selectedOption={selectedOption} setSelectedOption={(val) => { setSelectedOption(val) }} />
           </div>
 
@@ -244,13 +245,13 @@ function DynamicInputFields() {
           <div className='row mt-2'>
             <div className='col'>
               Enter Initial node
-              <input type='text' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }}></input>
-              {initialError && <div><br /><span id='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
+              <input type='text' placeholder='A' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }}></input>
+              {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
             </div>
             <div className='col'>
               Enter Final Node
-              <input type='text' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }}></input>
-              {finalError && <div><br /><span id='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
+              <input type='text' placeholder='F' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }}></input>
+              {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
             </div>
           </div>
           :
@@ -264,12 +265,12 @@ function DynamicInputFields() {
         </div>
         {inputErr && <div className='row mt-2'>
           <div className='col'>
-            <span id='inputNodeError' style={{ color: 'red' }}>Input shouldn't contain empty node</span>
+            <span id='inputNodeError' data-testid='inputNodeError' style={{ color: 'red' }}>Input shouldn't contain empty node</span>
           </div>
         </div>}
         {criteriaErr && <div className='row mt-2'>
           <div className='col'>
-            <span id='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
+            <span id='criteriaError' data-testid='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
           </div>
         </div>}
       </div >
