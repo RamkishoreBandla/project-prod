@@ -3,13 +3,13 @@ import Criteria from './Criteria';
 
 import Results from './Results';
 import { edgePathCoverageIF, findAllPaths, findEdgePairs, getAllNodes, nodeCoverageLogic } from './Logic';
-import TotalResults from './TotalResults';
-import { Alert, Box, Card, TextField, ThemeProvider } from '@mui/material';
+import { Alert, Box, Card, Fab, TextField, ThemeProvider, Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
-import { AccountCircle } from '@mui/icons-material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
+import CustomPaginationActionsTable from './PaginationTable';
+import AddIcon from '@mui/icons-material/Add';
 
 function DynamicInputFields() {
   const [inputs, setInputs] = useState([{ id: 1, value1: '', value2: '' }]);
@@ -228,8 +228,10 @@ function DynamicInputFields() {
               </div>
               <div className='col-md-2'>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end', }}>
-                  <DeleteOutlinedIcon sx={{ width: '2em', height: '2.10em', color: 'red', cursor: 'pointer' }}
-                    onClick={() => handleRemoveInput(index)} />
+                  <Tooltip title="Delete" placement='right'>
+                    <DeleteOutlinedIcon sx={{ width: '2em', height: '2.10em', color: 'red', cursor: 'pointer' }}
+                      onClick={() => handleRemoveInput(index)} />
+                  </Tooltip>
                 </Box>
 
 
@@ -237,11 +239,17 @@ function DynamicInputFields() {
             </div>
           ))}
 
-
+{/* Add new button */}
           <div className='row mt-2'>
             <div className='col'>
-              <AddCircleOutlineRoundedIcon color='primary' sx={{ fontSize: 40, cursor: 'pointer' }} onClick={handleAddInput} />
 
+              <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                <Tooltip title='Add new' placement='right'>
+                  <Fab color="primary" aria-label="add" onClick={handleAddInput}>
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
+              </Box>
             </div>
           </div>
 
@@ -267,7 +275,8 @@ function DynamicInputFields() {
                   <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
                 </Box>
 
-                {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
+                {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>
+                  <Alert variant="filled" severity="error">Initial node doesn't exist in the input graph</Alert></span></div>}
               </div>
               <div className='col'>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -277,7 +286,9 @@ function DynamicInputFields() {
                   <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
                 </Box>
 
-                {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
+                {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>
+                  <Alert variant="filled" severity="error">Final node doesn't exist in the input graph</Alert>
+                </span></div>}
               </div>
             </div>
             :
@@ -293,7 +304,7 @@ function DynamicInputFields() {
             </div>
           </div>
           {inputErr && <div className='row mt-2'>
-            <div className='col'>
+            <div className='col-lg-6'>
               <span id='inputNodeError' data-testid='inputNodeError' style={{ color: 'red' }}>
                 <Alert variant="filled" severity="error">
                   Input shouldn't contain empty node
@@ -303,23 +314,26 @@ function DynamicInputFields() {
             </div>
           </div>}
           {criteriaErr && <div className='row mt-2'>
-            <div className='col'>
-              <span id='criteriaError' data-testid='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
+            <div className='col-lg-6'>
+              <span id='criteriaError' data-testid='criteriaError' style={{ color: 'red' }}>
+                <Alert variant="filled" severity="error">
+                  Please choose Criteria
+                </Alert></span>
             </div>
           </div>}
         </Card>
       </div >
 
       <div className='container mt-5'>
-        <Card sx={{padding:3}} elevation={'5'}>
-        <h3>Result</h3>
-        <Results finalResults={finalResults} />
+        <Card sx={{ padding: 3 }} elevation={'5'}>
+          <h3>Result</h3>
+          <Results finalResults={finalResults} />
         </Card>
       </div>
       <div className='container mt-5 mb-5'>
-        <Card sx={{padding:3}} elevation={'5'}>
-        <h3 variant='primary'>History</h3>
-        {totalResults.length > 0 ? <TotalResults totalResults={totalResults} /> : null}
+        <Card sx={{ padding: 3 }} elevation={'5'}>
+          <h3 variant='primary'>History</h3>
+          {totalResults.length > 0 ? <CustomPaginationActionsTable totalResults={totalResults} /> : null}
         </Card>
       </div>
 

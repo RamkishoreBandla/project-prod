@@ -4,14 +4,14 @@ const Results = ({ finalResults  }) => {
             <div className="row">
                 <div className="col">
                     {finalResults && <table data-testid='currentResultsTable' id="currentResultsTable" className="table table-hover">
-                        <thead className="thead-dark">
+                        <thead  className="" style={{backgroundColor:'#1565c0'}}>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Input Graph</th>
-                                <th scope="col">Criteria</th>
-                                <th scope="col">Initial Node</th>
-                                <th scope="col">Final Node</th>
-                                <th scope="col">Output</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">#</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">Input Graph</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">Criteria</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">Initial Node</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">Final Node</th>
+                                <th  style={{backgroundColor:'#1565c0',color:'white'}} scope="col">Output</th>
                             </tr>
                         </thead>
                         <tbody>

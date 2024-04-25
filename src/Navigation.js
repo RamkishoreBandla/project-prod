@@ -10,13 +10,13 @@ function Navigation() {
   return (
     <>
     
-    <Navbar bg="primary" data-bs-theme="dark">
+    <Navbar sticky='top' bg="primary" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to="/home"
         >Graph Test Path Coverage</Navbar.Brand>
         <Nav className="me-auto">
-        <Nav.Link as={Link} to="/home">Home</Nav.Link>
-          <Nav.Link as={Link} to="/tool">Tool</Nav.Link>
+        <Nav.Link as={Link} to="/home" style={{color:'white'}}>Home</Nav.Link>
+          <Nav.Link as={Link} style={{color:'white'}} to="/tool">Tool</Nav.Link>
           
         </Nav>
       </Container>
