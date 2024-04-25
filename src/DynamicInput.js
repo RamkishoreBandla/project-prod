@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import Criteria from './Criteria';
-import { Button } from 'react-bootstrap';
+
 import Results from './Results';
 import { edgePathCoverageIF, findAllPaths, findEdgePairs, getAllNodes, nodeCoverageLogic } from './Logic';
 import TotalResults from './TotalResults';
+import { Alert, Box, Card, TextField, ThemeProvider } from '@mui/material';
+import Button from '@mui/material/Button';
+import { AccountCircle } from '@mui/icons-material';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
 
 function DynamicInputFields() {
   const [inputs, setInputs] = useState([{ id: 1, value1: '', value2: '' }]);
@@ -44,7 +50,7 @@ function DynamicInputFields() {
   const graphValidator = (finalGraph) => {
     let flag = false;
     //missing nodes
-    for (let [k, ] of Object.entries(finalGraph)) {
+    for (let [k,] of Object.entries(finalGraph)) {
       if (k === '' || k === ' ') {
         setInputErr(true);
         flag = true;
@@ -71,7 +77,7 @@ function DynamicInputFields() {
     }
 
     //missing nodes
-    for (let [k, ] of Object.entries(finalGraph)) {
+    for (let [k,] of Object.entries(finalGraph)) {
       if (k === '' || k === ' ') {
         setInputErr(true);
         flag = true;
@@ -186,101 +192,135 @@ function DynamicInputFields() {
     <>
       <div className='container mt-5'>
         <div className='row'>
-          <div className='col'>
+          <div className='col text-center'>
             <h2>Graph Edge Pair Coverage</h2>
           </div>
         </div>
       </div>
 
+
       <div className='container mt-5'>
 
-        {inputs.map((input, index) => (
-          <div key={input.id} className='row mt-1'>
-            <div className='col'>
-              Enter Node: &nbsp;
-              <input
-                type="text"
-                name="value1"
-                value={input.value1}
-                placeholder='eg: A'
-                onChange={(e) => handleInputChange(index, e)}
-              />
+        <Card sx={{ padding: 5 }} elevation={'5'}>
+          {inputs.map((input, index) => (
+            <div key={input.id} className='row mt-1'>
+              <div className='col'>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+
+                  <TextField name="value1" fullWidth
+                    value={input.value1}
+                    placeholder='eg: A'
+                    onChange={(e) => handleInputChange(index, e)} id="input-with-sx" label="Enter Node" variant="standard" />
+                  <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                </Box>
+
+              </div>
+              <div className='col'>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+
+                  <TextField name="value2" fullWidth
+                    value={input.value2}
+                    placeholder='eg: B,C,D'
+                    onChange={(e) => handleInputChange(index, e)} id="input-with-sx" label="Enter Neighbors" variant="standard" />
+                  <LiveHelpOutlinedIcon sx={{ color: 'primary', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                </Box>
+
+              </div>
+              <div className='col-md-2'>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end', }}>
+                  <DeleteOutlinedIcon sx={{ width: '2em', height: '2.10em', color: 'red', cursor: 'pointer' }}
+                    onClick={() => handleRemoveInput(index)} />
+                </Box>
+
+
+              </div>
             </div>
-            <div className='col'>
-              Enter Neighbors: &nbsp;
-              <input
-                type="text"
-                name="value2"
-                value={input.value2}
-                placeholder='eg: B,C,D'
-                onChange={(e) => handleInputChange(index, e)}
-              />
-            </div>
-            <div className='col-md-2'>
-              <button onClick={() => handleRemoveInput(index)}>Remove</button>
-
-            </div>
-          </div>
-        ))}
+          ))}
 
 
-        <div className='row mt-2'>
-          <div className='col'>
-            <button onClick={handleAddInput}>Add</button>
-          </div>
-        </div>
-
-        {/* criteria comp */}
-        <div className='row mt-2'>
-          <div className='col'>
-            <h4>Select Criteria </h4>
-            <Criteria selectedOption={selectedOption} setSelectedOption={(val) => { setSelectedOption(val) }} />
-          </div>
-
-        </div>
-
-
-        {/* initail final node appearance logic */}
-        {selectedOption && selectedOption !== 'allep' ?
           <div className='row mt-2'>
             <div className='col'>
-              Enter Initial node
-              <input type='text' placeholder='A' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }}></input>
-              {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
-            </div>
-            <div className='col'>
-              Enter Final Node
-              <input type='text' placeholder='F' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }}></input>
-              {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
-            </div>
-          </div>
-          :
-          null
-        }
+              <AddCircleOutlineRoundedIcon color='primary' sx={{ fontSize: 40, cursor: 'pointer' }} onClick={handleAddInput} />
 
-        <div className='row mt-2'>
-          <div className='col'>
-            <Button className='primary' onClick={(e) => { handleSubmission(e) }}>Submit</Button>
+            </div>
           </div>
-        </div>
-        {inputErr && <div className='row mt-2'>
-          <div className='col'>
-            <span id='inputNodeError' data-testid='inputNodeError' style={{ color: 'red' }}>Input shouldn't contain empty node</span>
+
+          {/* criteria comp */}
+          <div className='row mt-3'>
+            <div className='col'>
+              <h4>Select Criteria </h4>
+              <Criteria selectedOption={selectedOption} setSelectedOption={(val) => { setSelectedOption(val) }} />
+            </div>
+
           </div>
-        </div>}
-        {criteriaErr && <div className='row mt-2'>
-          <div className='col'>
-            <span id='criteriaError' data-testid='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
+
+
+          {/* initail final node appearance logic */}
+          {selectedOption && selectedOption !== 'allep' ?
+            <div className='row mt-2'>
+              <div className='col'>
+
+                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+
+                  <TextField name="value3" fullWidth
+                    placeholder='A' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }} id="input-with-sx" label="Enter Initial node" variant="standard" />
+                  <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                </Box>
+
+                {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>Initial node doesn't exist in the input graph</span></div>}
+              </div>
+              <div className='col'>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+
+                  <TextField name="value3" fullWidth
+                    placeholder='F' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }} id="input-with-sx" label="Enter Final Node" variant="standard" />
+                  <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                </Box>
+
+                {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>Final node doesn't exist in the input graph</span></div>}
+              </div>
+            </div>
+            :
+            null
+          }
+
+          <div className='row mt-2'>
+            <div className='col'>
+              <Button variant="contained" size="medium" onClick={(e) => { handleSubmission(e) }}>
+                Submit
+              </Button>
+
+            </div>
           </div>
-        </div>}
+          {inputErr && <div className='row mt-2'>
+            <div className='col'>
+              <span id='inputNodeError' data-testid='inputNodeError' style={{ color: 'red' }}>
+                <Alert variant="filled" severity="error">
+                  Input shouldn't contain empty node
+                </Alert>
+
+              </span>
+            </div>
+          </div>}
+          {criteriaErr && <div className='row mt-2'>
+            <div className='col'>
+              <span id='criteriaError' data-testid='criteriaError' style={{ color: 'red' }}>Please choose Criteria</span>
+            </div>
+          </div>}
+        </Card>
       </div >
+
       <div className='container mt-5'>
+        <Card sx={{padding:3}} elevation={'5'}>
         <h3>Result</h3>
         <Results finalResults={finalResults} />
+        </Card>
       </div>
-      <div className='container mt-5'>
-        <h3>History</h3>
+      <div className='container mt-5 mb-5'>
+        <Card sx={{padding:3}} elevation={'5'}>
+        <h3 variant='primary'>History</h3>
         {totalResults.length > 0 ? <TotalResults totalResults={totalResults} /> : null}
+        </Card>
       </div>
 
     </>
