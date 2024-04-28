@@ -10,6 +10,7 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
 import CustomPaginationActionsTable from './PaginationTable';
 import AddIcon from '@mui/icons-material/Add';
+import AlertDialogSlide from './Dialog';
 
 function DynamicInputFields() {
   const [inputs, setInputs] = useState([{ id: 1, value1: '', value2: '' }]);
@@ -24,6 +25,16 @@ function DynamicInputFields() {
   const [finalError, setFinalError] = useState(false);
   const [inputErr, setInputErr] = useState(false);
   const [criteriaErr, setCriteriaErr] = useState(false);
+
+  //dialog box
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleAddInput = () => {
     const newInput = {
@@ -49,6 +60,9 @@ function DynamicInputFields() {
 
   const graphValidator = (finalGraph) => {
     let flag = false;
+
+  
+
     //missing nodes
     for (let [k,] of Object.entries(finalGraph)) {
       if (k === '' || k === ' ') {
@@ -98,7 +112,7 @@ function DynamicInputFields() {
     setFinalResults(null);
 
     let finalGraph = constructGraph(inputs);
-    console.log(finalGraph);
+    console.log(finalGraph,"finalgraph");
 
     if (selectedOption === 'edgepairif') {
       let criteria_method = 'Test Path for Edge Pair Coverage Initial to Final'
@@ -183,13 +197,27 @@ function DynamicInputFields() {
   const constructGraph = (inputs) => {
     let graph = {}
     for (let i of inputs) {
-      graph[i['value1']] = i['value2'].split(",").map(e => e.trim());
+      if((i['value1']==='' || i['value1']===' ') && (i['value2']==='' || i['value2']==='')){
+
+      }
+      else{
+      graph[i['value1']] = i['value2'].split(",").map(e => e.trim()).filter(e=>e!=='');
+      }
     }
+
+    console.log(Object.keys(graph),"keys");
+    // single empty entry
+  if(Object.keys(graph).length===1 && 
+      (Object.keys(graph)[0]==='' || Object.keys(graph)[0]===' ') ){
+        return {}
+    }
+
     return graph;
   }
 
   return (
     <>
+    <div className='outerContainer'>
       <div className='container mt-5'>
         <div className='row'>
           <div className='col text-center'>
@@ -203,7 +231,7 @@ function DynamicInputFields() {
 
         <Card sx={{ padding: 5 }} elevation={'5'}>
           {inputs.map((input, index) => (
-            <div key={input.id} className='row mt-1'>
+            <div key={index} className='row mt-1'>
               <div className='col'>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
 
@@ -211,7 +239,7 @@ function DynamicInputFields() {
                     value={input.value1}
                     placeholder='eg: A'
                     onChange={(e) => handleInputChange(index, e)} id="input-with-sx" label="Enter Node" variant="standard" />
-                  <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                  <LiveHelpOutlinedIcon onClick={handleClickOpen} sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
                 </Box>
 
               </div>
@@ -222,13 +250,13 @@ function DynamicInputFields() {
                     value={input.value2}
                     placeholder='eg: B,C,D'
                     onChange={(e) => handleInputChange(index, e)} id="input-with-sx" label="Enter Neighbors" variant="standard" />
-                  <LiveHelpOutlinedIcon sx={{ color: 'primary', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                  <LiveHelpOutlinedIcon onClick={handleClickOpen} sx={{ color: 'primary', mr: 1, my: 0.5, cursor: 'pointer' }} />
                 </Box>
 
               </div>
               <div className='col-md-2'>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end', }}>
-                  <Tooltip title="Delete" placement='right'>
+                  <Tooltip title="Delete node" placement='right'>
                     <DeleteOutlinedIcon sx={{ width: '2em', height: '2.10em', color: 'red', cursor: 'pointer' }}
                       onClick={() => handleRemoveInput(index)} />
                   </Tooltip>
@@ -244,7 +272,7 @@ function DynamicInputFields() {
             <div className='col'>
 
               <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                <Tooltip title='Add new' placement='right'>
+                <Tooltip title='Add new node' placement='right'>
                   <Fab color="primary" aria-label="add" onClick={handleAddInput}>
                     <AddIcon />
                   </Fab>
@@ -336,7 +364,8 @@ function DynamicInputFields() {
           {totalResults.length > 0 ? <CustomPaginationActionsTable totalResults={totalResults} /> : null}
         </Card>
       </div>
-
+      </div>
+      <AlertDialogSlide open={open} setOpen={setOpen} handleClickOpen={handleClickOpen} handleClose={handleClose} />
     </>
   );
 }

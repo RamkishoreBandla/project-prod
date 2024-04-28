@@ -6,10 +6,12 @@ function App() {
 
   return (
     <>
+    <div className='wholeLayer' >
+    
       <BrowserRouter>
         <Navigation />
       </BrowserRouter>
-
+      </div>
     </>
   );
 }
