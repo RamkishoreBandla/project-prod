@@ -1,7 +1,11 @@
 
 //displays all the paths from start to end
+
+import { callAPI } from "./TestLogic";
+
 //edge pair coverage (initial to final)
-export const findAllPaths = (graph, start, end) => {
+export const findAllPaths =async (graph, start, end) => {
+    let checker= await callAPI({edges:displayAllEdges(graph),start,end})
     const visitedEdges = new Set();
     let edgPairCov = [];
     function dfs(node, path) {
@@ -25,6 +29,8 @@ export const findAllPaths = (graph, start, end) => {
     }
 
     dfs(start, [start]);
+    
+    console.log(checker,'checker');
     return edgPairCov;
 }
 

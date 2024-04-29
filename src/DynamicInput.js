@@ -103,7 +103,7 @@ function DynamicInputFields() {
 
   }
 
-  const handleSubmission = (e) => {
+  const handleSubmission = async(e) => {
     //reset error values for new submission
     setInitialError(false);
     setFinalError(false);
@@ -120,7 +120,7 @@ function DynamicInputFields() {
       let nodes = getAllNodes(finalGraph);
       //validations check
       if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
-        let allEdgePairsInitialtoFinal = findAllPaths(finalGraph, firstNode, lastNode);
+        let allEdgePairsInitialtoFinal = await findAllPaths(finalGraph, firstNode, lastNode);
         let outputObj = {
           input_graph: finalGraph,
           initial_node: firstNode,
