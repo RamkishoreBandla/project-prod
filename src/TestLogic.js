@@ -14,7 +14,7 @@ export const callAPI = async ({ edges, start, end }) => {
             console.log(edge);
             encstring += edge[0] + '+' + edge[1] + '%0D%0A'
         }
-        const apiUrl = `https://cs.gmu.edu:8443/offutt/coverage/GraphCoverage?edges=${encstring}&initialNode=${start}&endNode=${end}&algorithm2=Edge-Pair%20Coverage`;
+        const apiUrl = `https://cors-anywhere.herokuapp.com/https://cs.gmu.edu:8443/offutt/coverage/GraphCoverage?edges=${encstring}&initialNode=${start}&endNode=${end}&algorithm2=Edge-Pair%20Coverage`;
         console.log(apiUrl, "api url");
         let data = await axios.post(apiUrl)
         // console.log(data);
@@ -62,3 +62,21 @@ export const callAPI = async ({ edges, start, end }) => {
     }
 }
 // callAPI({edges,start,end});
+
+export const callHealth=async({edges,start,end})=>{
+
+    try {
+
+        let obj={
+            edges,
+            start,
+            end
+        }
+        let apidata= await axios.post("https://server-xo0a.onrender.com/proxy",obj);
+        return apidata.data.ep;
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+
+}
