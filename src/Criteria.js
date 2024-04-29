@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 
 function Criteria({ selectedOption, setSelectedOption }) {
 
-console.log(selectedOption);
+// console.log(selectedOption);
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
     };

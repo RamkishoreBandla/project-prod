@@ -130,7 +130,8 @@ function DynamicInputFields() {
         }
         console.log(outputObj);
         setFinalResults(outputObj, "test path edge pair path initial to final");
-        setTotalResults([...totalResults, outputObj]);
+
+        setTotalResults([outputObj,...totalResults]);
       }
     }
     else if (selectedOption === 'allep') {
@@ -155,7 +156,7 @@ function DynamicInputFields() {
       let nodes = getAllNodes(finalGraph);
       //validations check
       if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
-        let node_coverage_result = nodeCoverageLogic(finalGraph, firstNode, lastNode);
+        let node_coverage_result = await nodeCoverageLogic(finalGraph, firstNode, lastNode);
         console.log(node_coverage_result, " node coverage from function");
         let outputObj = {
           input_graph: finalGraph,
@@ -174,7 +175,7 @@ function DynamicInputFields() {
       let nodes = getAllNodes(finalGraph);
       //validations check
       if (nodesValidator(nodes, firstNode, lastNode, finalGraph)) {
-        let node_coverage_result = edgePathCoverageIF(finalGraph, firstNode, lastNode);
+        let node_coverage_result =await edgePathCoverageIF(finalGraph, firstNode, lastNode);
 
         let outputObj = {
           input_graph: finalGraph,
@@ -205,7 +206,7 @@ function DynamicInputFields() {
       }
     }
 
-    console.log(Object.keys(graph),"keys");
+    // console.log(Object.keys(graph),"keys");
     // single empty entry
   if(Object.keys(graph).length===1 && 
       (Object.keys(graph)[0]==='' || Object.keys(graph)[0]===' ') ){
