@@ -11,6 +11,7 @@ import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
 import CustomPaginationActionsTable from './PaginationTable';
 import AddIcon from '@mui/icons-material/Add';
 import AlertDialogSlide from './Dialog';
+import AlertDialogSlide1 from './DialogIF';
 
 function DynamicInputFields() {
   const [inputs, setInputs] = useState([{ id: 1, value1: '', value2: '' }]);
@@ -36,6 +37,15 @@ function DynamicInputFields() {
     setOpen(false);
   };
 
+  //dialog box 2
+  const [open1, setOpen1] = useState(false);
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
   const handleAddInput = () => {
     const newInput = {
       id: inputs.length + 1,
@@ -376,7 +386,7 @@ function DynamicInputFields() {
 
                     <TextField name="value3" fullWidth
                       placeholder='A' value={firstNode} onChange={(e) => { setFirstNode(e.target.value) }} id="input-with-sx" label="Enter Initial node" variant="standard" />
-                    <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                    <LiveHelpOutlinedIcon onClick={handleClickOpen1} sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
                   </Box>
 
                   {initialError && <div><br /><span id='initialNodeError' data-testid='initialNodeError' style={{ color: 'red' }}>
@@ -387,7 +397,7 @@ function DynamicInputFields() {
 
                     <TextField name="value3" fullWidth
                       placeholder='F' value={lastNode} onChange={(e) => { setLastNode(e.target.value) }} id="input-with-sx" label="Enter Final Node" variant="standard" />
-                    <LiveHelpOutlinedIcon sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
+                    <LiveHelpOutlinedIcon onClick={handleClickOpen1} sx={{ color: 'action.active', mr: 1, my: 0.5, cursor: 'pointer' }} />
                   </Box>
 
                   {finalError && <div><br /><span id='finalNodeError' data-testid='finalNodeError' style={{ color: 'red' }}>
@@ -442,6 +452,7 @@ function DynamicInputFields() {
         </div>
       </div>
       <AlertDialogSlide open={open} setOpen={setOpen} handleClickOpen={handleClickOpen} handleClose={handleClose} />
+      <AlertDialogSlide1 open={open1} setOpen={setOpen1} handleClickOpen={handleClickOpen1} handleClose={handleClose1} />
     </>
   );
 }
