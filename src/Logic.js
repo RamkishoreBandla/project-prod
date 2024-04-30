@@ -88,11 +88,15 @@ export const findAllPaths =async (graph, start, end) => {
 
     dfs(start, [start]);
     
+    console.log(edgPairCov,"org output");
     console.log(checker,'checker');
     if(checker.length>0){
+
+        checker=checker.filter(e=>e.length>2)
+
         checker=convertToStrings(checker);
         edgPairCov = insertMissingElements(edgPairCov,checker)
-        console.log(edgPairCov.length,"before unq");
+        // console.log(edgPairCov.length,"before unq");
     }
     return edgPairCov;
 }
@@ -121,7 +125,7 @@ export const nodeCoverageLogic =async (graph, start, end) => {
         }
     }
 
-    console.log(unqNodesPaths, "node coverage unqNodepaths");
+    // console.log(unqNodesPaths, "node coverage unqNodepaths");
     return unqNodesPaths;
 }
 
@@ -180,7 +184,7 @@ export function displayAllEdges(graph) {
             allEdges.push([node,adjacentNode])
         }
     }
-    console.log(allEdges,"all edges");
+    // console.log(allEdges,"all edges");
 return allEdges;
 }
 

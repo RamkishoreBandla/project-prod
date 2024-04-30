@@ -18,27 +18,27 @@ describe('Graph Logic functions',()=>{
         expect(findEdgePairs(sampleGraph)).toEqual([['A','C','D']]);
     });
 
-    it('Test for returning node coverage test path from initial to final',()=>{
+    it('Test for returning node coverage test path from initial to final',async()=>{
         let sampleGraph={
             'A':['B','C'],
             'C':['D']
         }
         let initial='A'
         let final='D'
-        expect(nodeCoverageLogic(sampleGraph,initial,final)).toEqual([['A','C','D']])
+        expect(await nodeCoverageLogic(sampleGraph,initial,final)).toEqual([['A','C','D']])
     });
 
-    it('Test for returning edge overage test path from initial to final',()=>{
+    it('Test for returning edge overage test path from initial to final',async()=>{
         let sampleGraph={
             'A':['B','C'],
             'C':['D']
         }
         let initial='A'
         let final='D'
-        expect(edgePathCoverageIF(sampleGraph,initial,final)).toEqual([['A','C','D']])
+        expect(await edgePathCoverageIF(sampleGraph,initial,final)).toEqual([['A','C','D']])
     })
 
-    it('Test for returning edge pair coverage test path from initial to final',()=>{
+    it('Test for returning edge pair coverage test path from initial to final',async()=>{
         let sampleGraph={
             'A':['B','C'],
             'B':['C','D'],
@@ -46,7 +46,7 @@ describe('Graph Logic functions',()=>{
         }
         let initial='A'
         let final='E'
-        expect(findAllPaths(sampleGraph,initial,final)).toEqual([['A','B','D','E']])
+        expect(await findAllPaths(sampleGraph,initial,final)).toEqual([['A','B','D','E']])
     });
 
     it('Test for returning all edges in a input graph',()=>{
@@ -98,27 +98,27 @@ describe('Graph Logic functions',()=>{
         expect(findEdgePairs(sampleGraph)).toEqual([]);
     });
 
-    it('Test for returning node coverage test path empty [] when start and end not in graph from initial to final',()=>{
+    it('Test for returning node coverage test path empty [] when start and end not in graph from initial to final',async()=>{
         let sampleGraph={
             'A':['B'],
             'C':['D']
         }
         let initial='Z'
         let final='X'
-        expect(nodeCoverageLogic(sampleGraph,initial,final)).toEqual([])
+        expect(await nodeCoverageLogic(sampleGraph,initial,final)).toEqual([])
     });
 
-    it('Test for returning edge coverage test path to return [] from initial to final when no edges are connected and initial and final not in graph',()=>{
+    it('Test for returning edge coverage test path to return [] from initial to final when no edges are connected and initial and final not in graph',async()=>{
         let sampleGraph={
             'A':['B'],
             'C':['D']
         }
         let initial='Z'
         let final='X'
-        expect(edgePathCoverageIF(sampleGraph,initial,final)).toEqual([])
+        expect(await edgePathCoverageIF(sampleGraph,initial,final)).toEqual([])
     })
 
-    it('Test for returning edge pair coverage test path from initial to final to be empty [] when there are no edge pairs and initial and final not in input graph',()=>{
+    it('Test for returning edge pair coverage test path from initial to final to be empty [] when there are no edge pairs and initial and final not in input graph',async()=>{
         let sampleGraph={
             'A':['B',],
             'B':[],
@@ -126,7 +126,7 @@ describe('Graph Logic functions',()=>{
         }
         let initial='A'
         let final='E'
-        expect(findAllPaths(sampleGraph,initial,final)).toEqual([])
+        expect(await findAllPaths(sampleGraph,initial,final)).toEqual([])
     });
 
     it('Test for returning all edges in a input graph to be empty [] when input is incomplete',()=>{

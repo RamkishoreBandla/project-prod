@@ -120,6 +120,7 @@ export default function CustomPaginationActionsTable({totalResults}) {
             <StyledTableCell>#</StyledTableCell>
             <StyledTableCell >Input Graph</StyledTableCell>
             <StyledTableCell >Criteria</StyledTableCell>
+            <StyledTableCell >Not Covered</StyledTableCell>
             <StyledTableCell >Initial Node</StyledTableCell>
             <StyledTableCell >Final Node</StyledTableCell>
             <StyledTableCell >Output</StyledTableCell>
@@ -139,6 +140,11 @@ export default function CustomPaginationActionsTable({totalResults}) {
               </TableCell>
               <TableCell >
                 {row.criteria_method}
+              </TableCell>
+              <TableCell>
+              <ul>
+               {row.missing_stuff.map((e, i) => <li key={i}>{e.join(', ')}</li>)}
+                </ul>
               </TableCell>
               <TableCell >
                 {row?.initial_node}

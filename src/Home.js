@@ -18,11 +18,11 @@ export default function Home() {
                     aria-controls="panel1-content"
                     id="panel1-header"
                 >
-                    <Typography>
-                        <b> <h2 style={{ color: 'blue' }}>  What is Graph coverage edge-pair? </h2></b></Typography>
+                   
+                        <b> <h2 style={{ color: 'blue' }}>  What is Graph coverage edge-pair? </h2></b>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    
                         <h3> Graph coverage edge-pair (node coverage, edge coverage, and edge-pair coverage)</h3>
                         <p>
                             In software testing, graphs are often used to represent potential executions of programs. Individual methods or functions
@@ -50,7 +50,7 @@ export default function Home() {
                             of edges in the graph.
                         </p>
 
-                    </Typography>
+                    
                 </AccordionDetails>
             </Accordion>
             <Accordion defaultExpanded elevation={5}>
@@ -59,18 +59,18 @@ export default function Home() {
                     aria-controls="panel2-content"
                     id="panel2-header"
                 >
-                    <Typography>
+                   
 
                         <b> <h2 style={{ color: 'blue' }}>  How to use the tool? </h2></b>
-                    </Typography>
+                   
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    
                      
                         <p>
                             <img src={instructionImg} alt='instructions'></img>
                         </p>
-                        <p>
+                        
                             <ul>
                             
                                 <li>Consider the above simple graph as input graph. To enter the graph </li>
@@ -79,8 +79,8 @@ export default function Home() {
                                 <li><b>Note each neighbor should be seperated by comma otherwise they will be treated as single node</b></li>
                                 <li>Navigate to <Link to="/tool">tool</Link> page and experiment with different graphs</li>
                             </ul>
-                        </p>
-                    </Typography>
+                        
+                    
                 </AccordionDetails>
             </Accordion>
         </div>

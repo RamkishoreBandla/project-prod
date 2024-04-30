@@ -1,16 +1,11 @@
-// Provided data
-// const axios = require('axios');
-// const cheerio = require('cheerio');
+
 import axios from 'axios';
-import cheerio from 'cheerio';
-
-
-// callAPI({edges,start,end});
-
 export const callHealth=async({edges,start,end})=>{
 
     try {
+        // import axios from 'axios';
 
+        // const axios=require('axios')
         let obj={
             edges,
             start,
